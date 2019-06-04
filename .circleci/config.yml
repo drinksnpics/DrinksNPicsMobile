@@ -1,17 +1,18 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/my-project
     docker:
-      - image: circleci/node:8-browsers
+      - image: beevelop/ionic // this will setup ionic for your docker
     steps:
-      - checkout
-      - restore_cache:
-          key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: npm install
-      - save_cache:
-          key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          paths:
-            - "node_modules"
-      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-      - run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
+      - checkout // it will fetch the code from github or bitbucket
+      - run:
+          name: Install node modules // installing all the node dependecies for your project
+          command: npm install
+      - run:
+          name: Run unit tests // test cases, in case if you have any
+          command: npm test
+      - run:
+          name: Building android // building platform android to generate apk file
+          command: ionic cordova build android
+      - store_artifacts:
+          path: platforms/android/build/outputs/apk/android-debug.apk // storing the apk file in artifact to download and share with testing team

@@ -2,17 +2,17 @@ version: 2
 jobs:
   build:
     docker:
-      - image: beevelop/ionic // this will setup ionic for your docker
+      - image: beevelop/ionic
     steps:
-      - checkout // it will fetch the code from github or bitbucket
+      - checkout
       - run:
-          name: Install node modules // installing all the node dependecies for your project
+          name: Install node modules
           command: npm install
       - run:
-          name: Run unit tests // test cases, in case if you have any
+          name: Run unit tests
           command: npm test
       - run:
-          name: Building android // building platform android to generate apk file
+          name: Building android
           command: ionic cordova build android
       - store_artifacts:
-          path: platforms/android/build/outputs/apk/android-debug.apk // storing the apk file in artifact to download and share with testing team
+          path: platforms/android/build/outputs/apk/android-debug.apk

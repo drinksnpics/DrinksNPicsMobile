@@ -72,7 +72,7 @@
     <h3 *ngIf="getSizeCart() > 0" class="total_carrito">Total: {{getTotalCart() | currency}}</h3>
     <h2 *ngIf="getSizeCart() == 0" class="total_vacio">Your shopping cart is empty. 🛒</h2>
     <div *ngIf="getSizeCart() > 0" class="finalizar_compra" (click)="guardarCompra()">
-      Finalizar Compra
+      Finalize purchase.
     </div>
 
     <div *ngIf="compra_hecha" class="compra_hecha">

@@ -30,7 +30,7 @@
     </div>
     <div class="food" *ngFor="let element of food" (click)="agregarComida(element)">
       <div *ngIf="element.avaliable">
-        <img style="border-radius: 5%;" [src]="element.image_url">
+        <img style="border-radius: 3%;" [src]="element.image_url">
         <h3>{{element.productName}}</h3>
         <p>${{element.price}}</p>
       </div>

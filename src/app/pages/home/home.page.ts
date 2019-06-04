@@ -48,6 +48,9 @@ export class HomePage implements OnInit {
     this.carrito = false;
     this.content.scrollToTop();
     if (this.segment == 'food') {
+      this.db.list<Food>('/FoodProducts').valueChanges().subscribe((values) => {
+        this.food = values;
+      });
     } else if (this.segment == 'profile') {
       this.profile_active = true;
       this.profile = new User();
@@ -62,20 +65,7 @@ export class HomePage implements OnInit {
     } else {
       this.loadMovies();
     }
-    this.db.list<Food>('/FoodProducts').valueChanges().subscribe((values) => {
-    /*values.forEach(function (e) {
-      if (e.avaliable) {
-        this.food.push(e);
-      }
-    });*/
-      this.food = values;
-      /*this.food.forEach(function (e) {
-        console.log(e);
-        console.log(e.avaliable);
-        // console.log(e.price);
-      });
-*/
-  });
+
 
   }
 

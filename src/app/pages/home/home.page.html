@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cine App</ion-title>
+    <ion-title text-center><h1>Drinks N Pics</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -70,13 +70,13 @@
       </tbody>
     </table>
     <h3 *ngIf="getSizeCart() > 0" class="total_carrito">Total: {{getTotalCart() | currency}}</h3>
-    <h3 *ngIf="getSizeCart() == 0" class="total_vacio">Tu carrito está vacío.</h3>
+    <h2 *ngIf="getSizeCart() == 0" class="total_vacio">Your shopping cart is empty. 🛒</h2>
     <div *ngIf="getSizeCart() > 0" class="finalizar_compra" (click)="guardarCompra()">
       Finalizar Compra
     </div>
 
     <div *ngIf="compra_hecha" class="compra_hecha">
-      ¡Gracias por tu compra! Tu orden ha sido enviada.
+      Thank you for your purchase!, your order has been sent 🎉.
     </div>
   </div>
 

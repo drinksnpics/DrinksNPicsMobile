@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
       this.profile_active = true;
       this.profile = new User();
       this.profile.name = "Jose Velarde";
-      this.profile.email = "john_doe@gmail.com";
+      this.profile.email = "JoseVelarde90@gmail.com";
       this.profile.birthday = "May 12 1990";
       this.profile.registro = "April 21 2019";
     }else if(this.segment == "cart"){

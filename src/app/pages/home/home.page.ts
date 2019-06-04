@@ -47,10 +47,7 @@ export class HomePage implements OnInit {
     this.profile_active = false;
     this.carrito = false;
     this.content.scrollToTop();
-    if (this.segment == 'food'){
-      this.db.list<Food>('/FoodProducts').valueChanges().subscribe((values) => {
-        this.food = values;
-      });
+    if (this.segment == 'food') {
     } else if (this.segment == 'profile') {
       this.profile_active = true;
       this.profile = new User();
@@ -58,14 +55,28 @@ export class HomePage implements OnInit {
       this.profile.email = "JoseVelarde90@gmail.com";
       this.profile.birthday = "May 12 1990";
       this.profile.registro = "April 21 2019";
-    }else if(this.segment == "cart"){
+    } else if(this.segment == "cart") {
       this.carrito = true;
       let cache_arr = localStorage.getItem('carrito_arr');
       this.cart = JSON.parse(cache_arr);
-    }else{
+    } else {
       this.loadMovies();
     }
-    
+    this.db.list<Food>('/FoodProducts').valueChanges().subscribe((values) => {
+    /*values.forEach(function (e) {
+      if (e.avaliable) {
+        this.food.push(e);
+      }
+    });*/
+      this.food = values;
+      /*this.food.forEach(function (e) {
+        console.log(e);
+        console.log(e.avaliable);
+        // console.log(e.price);
+      });
+*/
+  });
+
   }
 
   onNextPage() {
@@ -102,7 +113,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  agregarComida(comida: Food){
+  agregarComida(comida: Food) {
     this.alimento_comprado =  true;
     let cache_arr = localStorage.getItem('carrito_arr');
     let cart_arr: Product[] = JSON.parse(cache_arr);
@@ -113,7 +124,7 @@ export class HomePage implements OnInit {
     }
     let repetido = false;
     cart_arr.forEach( elemento => {
-      if(elemento.name == comida.productName){
+      if (elemento.name == comida.productName) {
         elemento.quantity += 1;
         repetido = true;
       }

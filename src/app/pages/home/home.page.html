@@ -29,9 +29,11 @@
       Thanks for your purchase! Your food has been added to the cart.
     </div>
     <div class="food" *ngFor="let element of food" (click)="agregarComida(element)">
-      <img [src]="element.image_url">
-      <h3>{{element.productName}}</h3>
-      <p>${{element.price}}</p>
+      <div *ngIf="element.avaliable">
+        <img style="border-radius: 5%;" [src]="element.image_url">
+        <h3>{{element.productName}}</h3>
+        <p>${{element.price}}</p>
+      </div>
     </div>
   </div>
 

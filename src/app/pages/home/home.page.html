@@ -26,7 +26,7 @@
 
   <div class="food-flex" *ngIf="food">
     <div *ngIf="alimento_comprado" class="producto_comprado">
-      ¡Gracias por tu compra! Tu alimento ha sido agregado al carrito.
+      Thanks for your purchase! Your food has been added to the cart.
     </div>
     <div class="food" *ngFor="let element of food" (click)="agregarComida(element)">
       <img [src]="element.image_url">

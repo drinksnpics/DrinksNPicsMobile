@@ -1,0 +1,7 @@
+{
+  "name": "DrinksNPics",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

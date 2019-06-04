@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cine App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <h1 class="titulo_seccion" *ngIf="movies && segment == 'popular'">Populares</h1>
+  <h1 class="titulo_seccion" *ngIf="movies && segment == 'upcoming'">Próximamente</h1>
+  <h1 class="titulo_seccion" *ngIf="food && segment == 'food'">Alimentos</h1>
+  <h1 class="titulo_seccion" *ngIf="profile_active && segment == 'profile'">Perfil</h1>
+  <h1 class="titulo_seccion" *ngIf="carrito && segment == 'cart'">Carrito</h1>
+
+  <div class="movies-flex" *ngIf="movies">
+    <div class="movie" *ngFor="let movie of movies" (click)="onMovieDetail(movie.id)">
+      <div class="poster">
+        <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+        <img *ngIf="movie.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+      </div>
+      <div class="title">{{ movie.title }}</div>
+      <div class="year">{{ movie.release_date | date:'yyyy' }}</div>
+      <div class="vote"><ion-icon name="star"></ion-icon><b>{{ movie.vote_average }}</b>/10</div>
+    </div>
+  </div>
+
+  <div class="food-flex" *ngIf="food">
+    <div *ngIf="alimento_comprado" class="producto_comprado">
+      ¡Gracias por tu compra! Tu alimento ha sido agregado al carrito.
+    </div>
+    <div class="food" *ngFor="let element of food" (click)="agregarComida(element)">
+      <img [src]="element.image_url">
+      <h3>{{element.productName}}</h3>
+      <p>${{element.price}}</p>
+    </div>
+  </div>
+
+  <div *ngIf="profile_active">
+    <div class="perfil_foto">
+      <img src="../../../assets/img/profile.png">
+    </div>
+    <div class="perfil">
+      <p><b>Nombre:</b> {{profile.name}}</p>
+      <p><b>Correo:</b> {{profile.email}}</p>
+      <p><b>Fecha de Nacimiento:</b> {{profile.birthday}}</p>
+      <p><b>Fecha de Registro:</b> {{profile.registro}}</p>
+    </div>
+    <div class="cerrar_sesion">
+      Cerrar Sesión
+    </div>
+  </div>
+
+  <div *ngIf="carrito">
+    <table class="tabla_carrito" *ngIf="getSizeCart() > 0">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of cart">
+          <td>{{element.name}}</td>
+          <td>{{element.price | currency}}</td>
+          <td>
+            <input type="text" (keypress)="onlyNumbers($event)" (change)="cambiarCantidad($event,element.name)" value="{{element.quantity}}" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 *ngIf="getSizeCart() > 0" class="total_carrito">Total: {{getTotalCart() | currency}}</h3>
+    <h3 *ngIf="getSizeCart() == 0" class="total_vacio">Tu carrito está vacío.</h3>
+    <div *ngIf="getSizeCart() > 0" class="finalizar_compra" (click)="guardarCompra()">
+      Finalizar Compra
+    </div>
+
+    <div *ngIf="compra_hecha" class="compra_hecha">
+      ¡Gracias por tu compra! Tu orden ha sido enviada.
+    </div>
+  </div>
+
+  <div class="content-fullscreen-message" *ngIf="movies && movies.length == 0">
+    Se ha producido un error, no se han encontrado películas
+  </div>
+
+  <ion-button *ngIf="movies && movies.length > 0 && page < 5" expand="full" size="large" fill="clear" (click)="onNextPage()">Ver Más</ion-button>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="tabs">
+      <div class="tab" [ngClass]="{ 'active' : segment == 'popular' }" (click)="onTabSelected('popular')">
+        <ion-icon name="flame"></ion-icon>
+        <div class="label">Populares</div>
+      </div>
+      <div class="tab" [ngClass]="{ 'active' : segment == 'upcoming' }" (click)="onTabSelected('upcoming')">
+        <ion-icon name="calendar"></ion-icon>
+        <div class="label">Próximamente</div>
+      </div>
+      <div class="tab" [ngClass]="{ 'active' : segment == 'food' }" (click)="onTabSelected('food')">
+        <ion-icon name="pizza"></ion-icon>
+        <div class="label">Alimentos</div>
+      </div>
+      <div class="tab" [ngClass]="{ 'active' : segment == 'profile' }" (click)="onTabSelected('profile')">
+        <ion-icon name="person"></ion-icon>
+        <div class="label">Perfil</div>
+      </div>
+      <div class="tab" [ngClass]="{ 'active' : segment == 'cart' }" (click)="onTabSelected('cart')">
+        <ion-icon name="cart"></ion-icon>
+        <div class="label">Carrito ({{getSizeCart() | number }})</div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

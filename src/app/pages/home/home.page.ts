@@ -47,17 +47,17 @@ export class HomePage implements OnInit {
     this.profile_active = false;
     this.carrito = false;
     this.content.scrollToTop();
-    if(this.segment == "food"){
+    if (this.segment == 'food'){
       this.db.list<Food>('/FoodProducts').valueChanges().subscribe((values) => {
         this.food = values;
       });
-    }else if(this.segment == "profile"){
+    } else if (this.segment == 'profile') {
       this.profile_active = true;
       this.profile = new User();
-      this.profile.name = "John Doe";
+      this.profile.name = "Jose Velarde";
       this.profile.email = "john_doe@gmail.com";
-      this.profile.birthday = "12 de Mayo de 1990";
-      this.profile.registro = "21 de Abril de 2019";
+      this.profile.birthday = "May 12 1990";
+      this.profile.registro = "April 21 2019";
     }else if(this.segment == "cart"){
       this.carrito = true;
       let cache_arr = localStorage.getItem('carrito_arr');

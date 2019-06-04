@@ -6,11 +6,11 @@
 
 <ion-content padding>
 
-  <h1 class="titulo_seccion" *ngIf="movies && segment == 'popular'">Populares</h1>
-  <h1 class="titulo_seccion" *ngIf="movies && segment == 'upcoming'">Próximamente</h1>
-  <h1 class="titulo_seccion" *ngIf="food && segment == 'food'">Alimentos</h1>
-  <h1 class="titulo_seccion" *ngIf="profile_active && segment == 'profile'">Perfil</h1>
-  <h1 class="titulo_seccion" *ngIf="carrito && segment == 'cart'">Carrito</h1>
+  <h1 class="titulo_seccion" *ngIf="movies && segment == 'popular'">Billboard</h1>
+  <h1 class="titulo_seccion" *ngIf="movies && segment == 'upcoming'">Soon</h1>
+  <h1 class="titulo_seccion" *ngIf="food && segment == 'food'">Food</h1>
+  <h1 class="titulo_seccion" *ngIf="profile_active && segment == 'profile'">Profile</h1>
+  <h1 class="titulo_seccion" *ngIf="carrito && segment == 'cart'">Shoping cart</h1>
 
   <div class="movies-flex" *ngIf="movies">
     <div class="movie" *ngFor="let movie of movies" (click)="onMovieDetail(movie.id)">
@@ -84,7 +84,7 @@
     Se ha producido un error, no se han encontrado películas
   </div>
 
-  <ion-button *ngIf="movies && movies.length > 0 && page < 5" expand="full" size="large" fill="clear" (click)="onNextPage()">Ver Más</ion-button>
+  <!--<ion-button *ngIf="movies && movies.length > 0 && page < 5" expand="full" size="large" fill="clear" (click)="onNextPage()">Ver Más</ion-button>-->
 
 </ion-content>
 
@@ -93,23 +93,23 @@
     <div class="tabs">
       <div class="tab" [ngClass]="{ 'active' : segment == 'popular' }" (click)="onTabSelected('popular')">
         <ion-icon name="flame"></ion-icon>
-        <div class="label">Populares</div>
+        <div class="label">Billboard</div>
       </div>
       <div class="tab" [ngClass]="{ 'active' : segment == 'upcoming' }" (click)="onTabSelected('upcoming')">
         <ion-icon name="calendar"></ion-icon>
-        <div class="label">Próximamente</div>
+        <div class="label">Soon</div>
       </div>
       <div class="tab" [ngClass]="{ 'active' : segment == 'food' }" (click)="onTabSelected('food')">
         <ion-icon name="pizza"></ion-icon>
-        <div class="label">Alimentos</div>
+        <div class="label">Food</div>
       </div>
       <div class="tab" [ngClass]="{ 'active' : segment == 'profile' }" (click)="onTabSelected('profile')">
         <ion-icon name="person"></ion-icon>
-        <div class="label">Perfil</div>
+        <div class="label">Profile</div>
       </div>
       <div class="tab" [ngClass]="{ 'active' : segment == 'cart' }" (click)="onTabSelected('cart')">
         <ion-icon name="cart"></ion-icon>
-        <div class="label">Carrito ({{getSizeCart() | number }})</div>
+        <div class="label">Shoping cart ({{getSizeCart() | number }})</div>
       </div>
     </div>
   </ion-toolbar>
